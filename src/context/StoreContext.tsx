@@ -126,7 +126,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Cadastrar Produto (Loja)
   const addProduct = (newProd: Omit<Product, 'id' | 'created_at' | 'updated_at'>) => {
-    const id = 'prod-' + Date.now();
+    const id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'prod-' + Date.now();
     const createdProduct: Product = {
       ...newProd,
       id,
@@ -136,7 +136,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setProducts(prev => [createdProduct, ...prev]);
 
     if (isSupabaseConfigured) {
-      supabase.from('products').insert([createdProduct]).then(() => {});
+      supabase.from('products').insert([createdProduct]).then(({ error }) => {
+        if (error) console.error('Erro ao inserir produto no Supabase:', error);
+      });
     }
   };
 
@@ -204,16 +206,19 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Criar Pedido / Orçamento
   const createOrder = (orderData: Omit<Order, 'id' | 'created_at'>): Order => {
+    const id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'ped-' + Date.now();
     const newOrder: Order = {
       ...orderData,
-      id: 'PED-' + Math.floor(100000 + Math.random() * 900000),
+      id,
       created_at: new Date().toISOString()
     };
 
     setOrders(prev => [newOrder, ...prev]);
 
     if (isSupabaseConfigured) {
-      supabase.from('orders').insert([newOrder]).then(() => {});
+      supabase.from('orders').insert([newOrder]).then(({ error }) => {
+        if (error) console.error('Erro ao registrar pedido no Supabase:', error);
+      });
     }
 
     return newOrder;
