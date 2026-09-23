@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, ShieldCheck, User, Zap, Lock, Mail, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { X, ShieldCheck, User, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { UserRole } from '../types';
+import { HidraIcon } from './HidraIcon';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
           maxWidth: '520px',
           borderRadius: 'var(--radius-xl)',
           overflow: 'hidden',
-          background: '#0f131a',
+          background: 'var(--bg-secondary)',
           border: '1px solid var(--border-yellow)',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(250, 204, 21, 0.2)',
           position: 'relative'
@@ -83,22 +84,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
         {/* Top Header */}
         <div style={{ padding: '2rem 2rem 1.25rem 2rem', textAlign: 'center', background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-subtle)' }}>
-          <div
-            style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '12px',
-              background: 'rgba(250, 204, 21, 0.15)',
-              color: 'var(--yellow-400)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 0.75rem auto'
-            }}
-          >
-            <Zap size={24} />
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem' }}>
+            <HidraIcon size={48} />
           </div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.35rem' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.35rem', color: 'var(--text-main)' }}>
             Portal HidraElétrica
           </h2>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { ShoppingCart, User, ShieldCheck, Search, Menu, X, Phone, Wrench, Droplet, Zap } from 'lucide-react';
+import { ShoppingCart, User, ShieldCheck, Search, Menu, X, Phone, Sun, Moon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useStore } from '../context/StoreContext';
+import { useTheme } from '../context/ThemeContext';
+import { HidraIcon } from './HidraIcon';
 
 interface HeaderProps {
   onOpenAuth: () => void;
@@ -18,6 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   const { totalItems, setIsCartOpen } = useCart();
   const { currentUser, isStoreAdmin, isBuyer, logout } = useAuth();
   const { storeSettings, searchQuery, setSearchQuery } = useStore();
+  const { isDark, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const cleanPhone = storeSettings.whatsapp_number.replace(/\D/g, '');
@@ -43,36 +46,22 @@ export const Header: React.FC<HeaderProps> = ({
       <nav className="glass-panel" style={{ borderBottom: '1px solid var(--border-subtle)', background: 'rgba(10, 12, 16, 0.92)' }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.9rem 1.5rem', gap: '1.5rem' }}>
           
-          {/* Logo da HidraElétrica */}
+          {/* Logo da HidraElétrica com Ícone Oficial */}
           <div 
             onClick={() => { setCurrentView('home'); setMobileMenuOpen(false); }}
             style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', userSelect: 'none' }}
           >
-            <div style={{
-              width: '42px',
-              height: '42px',
-              background: 'linear-gradient(135deg, #1e2430 0%, #11141a 100%)',
-              border: '2px solid var(--yellow-400)',
-              borderRadius: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 16px rgba(250, 204, 21, 0.25)',
-              position: 'relative'
-            }}>
-              <Droplet size={20} color="#38bdf8" style={{ position: 'absolute', left: '7px', bottom: '8px', opacity: 0.9 }} />
-              <Zap size={22} color="#facc15" style={{ position: 'absolute', right: '6px', top: '7px', filter: 'drop-shadow(0 0 4px #facc15)' }} />
-            </div>
+            <HidraIcon size={40} />
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                <span style={{ fontSize: '1.35rem', fontWeight: 800, fontFamily: 'Outfit', color: '#ffffff', letterSpacing: '-0.03em' }}>
-                  HIDRA
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                <span style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--text-main)', letterSpacing: '-0.03em' }}>
+                  Hidra
                 </span>
-                <span style={{ fontSize: '1.35rem', fontWeight: 800, fontFamily: 'Outfit', color: 'var(--yellow-400)', letterSpacing: '-0.03em' }}>
-                  ELÉTRICA
+                <span style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--yellow-400)', letterSpacing: '-0.03em' }}>
+                  Elétrica
                 </span>
               </div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginTop: '-3px' }}>
+              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginTop: '-3px' }}>
                 Materiais Técnicos & Obra
               </span>
             </div>
@@ -200,6 +189,28 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>Entrar</span>
               </button>
             )}
+
+            {/* Alternador de Tema Escuro / Claro */}
+            <button
+              onClick={toggleTheme}
+              style={{
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-card)',
+                color: isDark ? 'var(--yellow-400)' : '#b45309',
+                borderRadius: 'var(--radius-md)',
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                boxShadow: 'var(--shadow-sm)'
+              }}
+              title={isDark ? 'Mudar para Tema Claro' : 'Mudar para Tema Escuro'}
+            >
+              {isDark ? <Sun size={19} /> : <Moon size={19} />}
+            </button>
 
             {/* Botão Carrinho */}
             <button

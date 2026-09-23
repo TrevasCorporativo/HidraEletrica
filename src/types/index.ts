@@ -64,6 +64,26 @@ export interface StoreSettings {
   pix_key: string;
   pix_key_type: string;
   announcement_banner?: string;
+  // Landing Page Personalizável
+  hero_badge?: string;
+  hero_title?: string;
+  hero_subtitle?: string;
+  hero_cta_primary?: string;
+  hero_cta_whatsapp?: string;
+  feature_1_title?: string;
+  feature_1_desc?: string;
+  feature_2_title?: string;
+  feature_2_desc?: string;
+  feature_3_title?: string;
+  feature_3_desc?: string;
+  metric_1_val?: string;
+  metric_1_lbl?: string;
+  metric_2_val?: string;
+  metric_2_lbl?: string;
+  metric_3_val?: string;
+  metric_3_lbl?: string;
+  quote_banner_title?: string;
+  quote_banner_desc?: string;
 }
 
 export type OrderStatus = 'pendente' | 'em_separacao' | 'enviado' | 'concluido' | 'cancelado';

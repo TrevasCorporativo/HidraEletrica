@@ -1,146 +1,186 @@
 import React from 'react';
-import { ArrowRight, MessageSquare, ShieldCheck, Truck, Award, Zap, Droplet } from 'lucide-react';
+import { ArrowRight, MessageSquare, ShieldCheck, Truck, Droplet, Search } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { HidraIcon } from './HidraIcon';
 
 interface HeroProps {
   onGoToStore: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onGoToStore }) => {
-  const { storeSettings } = useStore();
+  const { storeSettings, searchQuery, setSearchQuery } = useStore();
   const cleanPhone = storeSettings.whatsapp_number.replace(/\D/g, '');
+
+  const heroBadge = storeSettings.hero_badge || 'Distribuidora & Varejo Especializado';
+  const heroTitle = storeSettings.hero_title || 'A Força da Hidráulica e a Potência da Elétrica';
+  const heroSubtitle = storeSettings.hero_subtitle || 'Cabos elétricos, disjuntores, quadros, tubos, conexões e iluminação industrial de alta performance. Pronta entrega para construtoras, instaladores e indústrias.';
+  const ctaPrimary = storeSettings.hero_cta_primary || 'Explorar Produtos';
+  const ctaWhatsapp = storeSettings.hero_cta_whatsapp || 'Orçamento via WhatsApp';
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onGoToStore();
+  };
 
   return (
     <section style={{
       position: 'relative',
-      padding: '4rem 0 5rem 0',
-      overflow: 'hidden',
-      borderBottom: '1px solid var(--border-subtle)'
+      padding: '4.5rem 0 3.5rem 0',
+      overflow: 'hidden'
     }}>
-      {/* Luz ambiente de fundo */}
+      {/* Luz ambiente suave de fundo */}
       <div style={{
         position: 'absolute',
-        top: '15%',
+        top: '10%',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '650px',
-        height: '350px',
-        background: 'radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, rgba(10, 12, 16, 0) 70%)',
-        filter: 'blur(50px)',
+        width: '600px',
+        height: '300px',
+        background: 'radial-gradient(circle, rgba(250, 204, 21, 0.12) 0%, rgba(0, 0, 0, 0) 70%)',
+        filter: 'blur(60px)',
         pointerEvents: 'none',
         zIndex: 0
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
           
-          {/* Badge superior */}
-          <div style={{ display: 'inline-flex', marginBottom: '1.25rem' }}>
-            <span className="badge-yellow" style={{ fontSize: '0.8rem', padding: '0.4rem 1rem' }}>
-              <Zap size={14} /> Distribuidora & Varejo Especializado
+          {/* Badge superior limpa com o ícone oficial */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', background: 'rgba(250, 204, 21, 0.08)', border: '1px solid rgba(250, 204, 21, 0.25)', padding: '0.4rem 1.1rem', borderRadius: 'var(--radius-full)' }}>
+            <HidraIcon size={20} />
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--yellow-400)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              {heroBadge}
             </span>
           </div>
 
-          {/* Título Principal */}
+          {/* Título Principal com tipografia refinada */}
           <h1 style={{
-            fontSize: 'clamp(2.3rem, 5vw, 3.8rem)',
+            fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
             fontWeight: 800,
             lineHeight: 1.15,
-            marginBottom: '1.5rem',
+            marginBottom: '1.25rem',
             letterSpacing: '-0.03em'
           }}>
-            A Força da <span style={{ color: '#38bdf8' }}>Hidráulica</span> e a Potência da <span className="text-gradient-yellow">Elétrica</span> em um Só Lugar
+            {heroTitle.includes('Hidráulica') && heroTitle.includes('Elétrica') ? (
+              <>
+                A Força da <span style={{ color: '#38bdf8' }}>Hidráulica</span> e a Potência da <span className="text-gradient-yellow">Elétrica</span>
+              </>
+            ) : (
+              heroTitle
+            )}
           </h1>
 
-          {/* Subtítulo */}
+          {/* Subtítulo Limpo */}
           <p style={{
-            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+            fontSize: 'clamp(1rem, 2vw, 1.18rem)',
             color: 'var(--text-muted)',
-            lineHeight: 1.6,
-            marginBottom: '2.5rem',
-            maxWidth: '720px',
-            margin: '0 auto 2.5rem auto'
+            lineHeight: 1.65,
+            marginBottom: '2.2rem',
+            maxWidth: '680px',
+            margin: '0 auto 2.2rem auto'
           }}>
-            Cabos elétricos, disjuntores, quadros, tubos, conexões e iluminação industrial. 
-            Soluções completas com pronta entrega para construtoras, eletricistas, encanadores e consumidores exigentes.
+            {heroSubtitle}
           </p>
 
+          {/* Barra de Busca Rápida Integrada */}
+          <form
+            onSubmit={handleSearchSubmit}
+            style={{
+              maxWidth: '560px',
+              margin: '0 auto 2rem auto',
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            <Search size={18} color="var(--text-dim)" style={{ position: 'absolute', left: '16px', zIndex: 2 }} />
+            <input
+              type="text"
+              placeholder="O que você precisa hoje? (Ex: Cabo 2,5mm, Tubo 25mm, Disjuntor...)"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              style={{
+                width: '100%',
+                background: 'var(--bg-card)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid var(--border-card)',
+                borderRadius: 'var(--radius-full)',
+                padding: '0.9rem 7.5rem 0.9rem 2.8rem',
+                fontSize: '0.92rem',
+                color: 'var(--text-main)',
+                outline: 'none',
+                boxShadow: 'var(--shadow-md)'
+              }}
+            />
+            <button
+              type="submit"
+              className="btn-primary"
+              style={{
+                position: 'absolute',
+                right: '6px',
+                padding: '0.55rem 1.1rem',
+                fontSize: '0.84rem',
+                borderRadius: 'var(--radius-full)'
+              }}
+            >
+              Buscar
+            </button>
+          </form>
+
           {/* Botões de Ação */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
             <button
               onClick={onGoToStore}
               className="btn-primary"
-              style={{ padding: '0.9rem 2rem', fontSize: '1.05rem' }}
+              style={{ padding: '0.85rem 1.8rem', fontSize: '0.95rem' }}
             >
-              <span>Explorar Catálogo Completo</span>
-              <ArrowRight size={18} />
+              <span>{ctaPrimary}</span>
+              <ArrowRight size={17} />
             </button>
 
             <a
-              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('Olá! Gostaria de solicitar um orçamento de materiais elétricos e hidráulicos.')}`}
+              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('Olá! Gostaria de cotar materiais elétricos e hidráulicos na HidraElétrica.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp"
-              style={{ padding: '0.9rem 1.8rem', fontSize: '1.05rem' }}
+              style={{ padding: '0.85rem 1.8rem', fontSize: '0.95rem' }}
             >
-              <MessageSquare size={19} />
-              <span>Orçamento via WhatsApp</span>
+              <MessageSquare size={18} />
+              <span>{ctaWhatsapp}</span>
             </a>
           </div>
 
-          {/* Grid de Diferenciais e Confiabilidade */}
+          {/* Faixa de Confiança Minimalista e Organizada */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1.25rem',
-            textAlign: 'left'
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '1.75rem',
+            padding: '1.25rem 2rem',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-xl)',
+            fontSize: '0.85rem',
+            color: 'var(--text-muted)'
           }}>
-            <div className="glass-panel" style={{ padding: '1.25rem', borderRadius: 'var(--radius-lg)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <div style={{ padding: '0.5rem', borderRadius: '8px', background: 'rgba(250, 204, 21, 0.15)', color: 'var(--yellow-400)' }}>
-                  <ShieldCheck size={20} />
-                </div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Normas ABNT</h4>
-              </div>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Materiais 100% certificados pelo Inmetro com garantia de segurança total.
-              </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <ShieldCheck size={17} color="var(--yellow-400)" />
+              <strong style={{ color: 'var(--text-main)' }}>Normas ABNT & Inmetro</strong>
             </div>
 
-            <div className="glass-panel" style={{ padding: '1.25rem', borderRadius: 'var(--radius-lg)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <div style={{ padding: '0.5rem', borderRadius: '8px', background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
-                  <Truck size={20} />
-                </div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Entrega em 24h</h4>
-              </div>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Frota própria ágil para abastecer sua obra ou reforma sem atrasos.
-              </p>
+            <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--text-dim)', opacity: 0.5 }} />
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <Truck size={17} color="#38bdf8" />
+              <strong style={{ color: 'var(--text-main)' }}>Entrega em 24h p/ Obras</strong>
             </div>
 
-            <div className="glass-panel" style={{ padding: '1.25rem', borderRadius: 'var(--radius-lg)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <div style={{ padding: '0.5rem', borderRadius: '8px', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
-                  <Award size={20} />
-                </div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Melhores Marcas</h4>
-              </div>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Parceria direta com Tigre, Schneider, Deca, Sil Fios e Steck.
-              </p>
-            </div>
+            <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--text-dim)', opacity: 0.5 }} />
 
-            <div className="glass-panel" style={{ padding: '1.25rem', borderRadius: 'var(--radius-lg)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <div style={{ padding: '0.5rem', borderRadius: '8px', background: 'rgba(234, 179, 8, 0.15)', color: 'var(--yellow-400)' }}>
-                  <Droplet size={20} />
-                </div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700 }}>Faturamento PJ</h4>
-              </div>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Condições exclusivas para empresas, empreiteiras e instaladores.
-              </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <Droplet size={17} color="#34d399" />
+              <strong style={{ color: 'var(--text-main)' }}>Faturamento Especial PJ</strong>
             </div>
           </div>
 

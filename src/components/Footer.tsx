@@ -7,12 +7,11 @@ import {
   MessageSquare,
   ShieldCheck,
   CreditCard,
-  Droplet,
-  Zap,
   ExternalLink,
   ChevronRight
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { HidraIcon } from './HidraIcon';
 
 interface FooterProps {
   onNavigate: (view: 'home' | 'loja' | 'sobre') => void;
@@ -27,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   );
 
   return (
-    <footer style={{ background: '#07090d', borderTop: '2px solid var(--border-yellow)', paddingTop: '4rem', color: 'var(--text-main)', position: 'relative' }}>
+    <footer style={{ background: 'var(--bg-secondary)', borderTop: '2px solid var(--border-yellow)', paddingTop: '4rem', color: 'var(--text-main)', position: 'relative' }}>
       <div className="container">
         
         {/* Grid de 4 Colunas */}
@@ -36,23 +35,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Coluna 1: Marca & Missão */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.2rem' }}>
-              <div style={{
-                width: '42px',
-                height: '42px',
-                background: 'linear-gradient(135deg, #1e2430 0%, #11141a 100%)',
-                border: '2px solid var(--yellow-400)',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative'
-              }}>
-                <Droplet size={18} color="#38bdf8" style={{ position: 'absolute', left: '7px', bottom: '8px' }} />
-                <Zap size={20} color="#facc15" style={{ position: 'absolute', right: '6px', top: '7px' }} />
-              </div>
+              <HidraIcon size={40} />
               <div>
-                <span style={{ fontSize: '1.3rem', fontWeight: 900, fontFamily: 'Outfit', color: '#fff' }}>HIDRA</span>
-                <span style={{ fontSize: '1.3rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--yellow-400)' }}>ELÉTRICA</span>
+                <span style={{ fontSize: '1.3rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--text-main)' }}>Hidra</span>
+                <span style={{ fontSize: '1.3rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--yellow-400)' }}>Elétrica</span>
               </div>
             </div>
 

@@ -54,7 +54,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
           maxHeight: '90vh',
           borderRadius: 'var(--radius-xl)',
           overflowY: 'auto',
-          background: '#11141c',
+          background: 'var(--bg-secondary)',
           border: '1px solid var(--border-yellow)',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(250, 204, 21, 0.15)',
           position: 'relative'

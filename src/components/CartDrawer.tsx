@@ -90,7 +90,7 @@ export const CartDrawer: React.FC = () => {
           width: '100%',
           maxWidth: '480px',
           height: '100%',
-          background: '#0e1219',
+          background: 'var(--bg-secondary)',
           borderLeft: '1px solid var(--border-yellow)',
           display: 'flex',
           flexDirection: 'column',

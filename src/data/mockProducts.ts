@@ -55,7 +55,27 @@ export const INITIAL_STORE_SETTINGS: StoreSettings = {
   business_hours_saturday: 'Sábado: 08:00 às 13:00',
   pix_key: 'financeiro@hidraeletrica.com.br',
   pix_key_type: 'Chave E-mail',
-  announcement_banner: '⚡ Atendimento e orçamento imediato pelo WhatsApp | Entregas em até 24h para obras e construtoras!'
+  announcement_banner: '⚡ Atendimento e orçamento imediato pelo WhatsApp | Entregas em até 24h para obras e construtoras!',
+  // Textos da Landing Page
+  hero_badge: 'Distribuidora & Varejo Especializado',
+  hero_title: 'A Força da Hidráulica e a Potência da Elétrica',
+  hero_subtitle: 'Cabos elétricos, disjuntores, quadros, tubos, conexões e iluminação industrial de alta performance. Pronta entrega para construtoras, instaladores e indústrias.',
+  hero_cta_primary: 'Explorar Produtos',
+  hero_cta_whatsapp: 'Orçamento via WhatsApp',
+  feature_1_title: 'Normatização Rigorosa ABNT',
+  feature_1_desc: 'Materiais 100% certificados pelo Inmetro e normas vigentes com garantia de procedência.',
+  feature_2_title: 'Entrega Rápida em até 24h',
+  feature_2_desc: 'Logística ágil e frota preparada para atender sua obra sem atrasos.',
+  feature_3_title: 'Condições Especiais para PJ',
+  feature_3_desc: 'Faturamento facilitado, atendimento técnico consultivo e descontos no atacado.',
+  metric_1_val: '+10.000',
+  metric_1_lbl: 'Itens em Estoque',
+  metric_2_val: '+5.000',
+  metric_2_lbl: 'Obras Abastecidas',
+  metric_3_val: '24h',
+  metric_3_lbl: 'Entrega Regional',
+  quote_banner_title: 'Tem uma lista de materiais ou projeto em mãos?',
+  quote_banner_desc: 'Envie sua planilha ou foto da lista direto pelo WhatsApp da loja. Montamos seu orçamento em minutos com as melhores condições.'
 };
 
 export const INITIAL_PRODUCTS: Product[] = [

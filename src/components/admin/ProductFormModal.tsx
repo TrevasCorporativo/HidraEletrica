@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, Save, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import { X, Save, AlertCircle, Image as ImageIcon, Upload, Sparkles } from 'lucide-react';
 import { Product } from '../../types';
 import { useStore } from '../../context/StoreContext';
+import { convertFileToDataUrl, generateProductImage } from '../../utils/imageHelper';
 
 interface ProductFormModalProps {
   isOpen: boolean;
@@ -79,6 +80,8 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
 
     const numOriginalPrice = originalPrice ? parseFloat(originalPrice.replace(',', '.')) : undefined;
 
+    const finalImageUrl = imageUrl.trim() || generateProductImage(name.trim(), categoryId);
+
     if (productToEdit) {
       updateProduct(productToEdit.id, {
         name: name.trim(),
@@ -88,7 +91,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
         original_price: numOriginalPrice,
         brand: brand.trim() || 'HidraElétrica',
         sku: sku.trim(),
-        image_url: imageUrl.trim() || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+        image_url: finalImageUrl,
         stock_quantity: numStock,
         show_stock_to_buyer: showStockToBuyer,
         is_active: isActive
@@ -102,7 +105,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
         original_price: numOriginalPrice,
         brand: brand.trim() || 'HidraElétrica',
         sku: sku.trim(),
-        image_url: imageUrl.trim() || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+        image_url: finalImageUrl,
         stock_quantity: numStock,
         show_stock_to_buyer: showStockToBuyer,
         is_active: isActive,
@@ -136,7 +139,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
           maxHeight: '92vh',
           borderRadius: 'var(--radius-xl)',
           overflowY: 'auto',
-          background: '#11141c',
+          background: 'var(--bg-secondary)',
           border: '1px solid var(--border-yellow)',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(250, 204, 21, 0.2)',
           position: 'relative'
@@ -247,26 +250,97 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             </div>
           </div>
 
-          {/* Imagem URL */}
-          <div className="form-group">
-            <label className="form-label">URL da Imagem do Produto</label>
-            <div style={{ display: 'flex', gap: '0.6rem' }}>
-              <input
-                type="url"
-                placeholder="https://..."
-                value={imageUrl}
-                onChange={e => setImageUrl(e.target.value)}
-                className="form-input"
-                style={{ flex: 1 }}
-              />
-              {imageUrl && (
-                <img
-                  src={imageUrl}
-                  alt="Preview"
-                  style={{ width: '42px', height: '42px', objectFit: 'cover', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}
-                  onError={e => (e.currentTarget.style.display = 'none')}
+          {/* Imagem do Produto: Importar, URL ou Gerar Automaticamente */}
+          <div className="form-group" style={{ background: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <div>
+                <label className="form-label" style={{ marginBottom: '0.15rem' }}>Foto do Material</label>
+                <span style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>
+                  Importe do computador, insira link ou gere uma foto realista automaticamente
+                </span>
+              </div>
+
+              {/* Botões de Ação para Imagem */}
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input
+                  type="file"
+                  id="product-file-import"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      try {
+                        const dataUrl = await convertFileToDataUrl(file);
+                        setImageUrl(dataUrl);
+                      } catch (err: any) {
+                        setError(err.message || 'Erro ao importar arquivo.');
+                      }
+                    }
+                  }}
                 />
-              )}
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('product-file-import')?.click()}
+                  className="btn-secondary"
+                  style={{ fontSize: '0.78rem', padding: '0.4rem 0.8rem' }}
+                  title="Importar imagem do seu computador"
+                >
+                  <Upload size={14} />
+                  <span>Importar Foto</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const generated = generateProductImage(name || 'material', categoryId);
+                    setImageUrl(generated);
+                  }}
+                  className="btn-outline-yellow"
+                  style={{ fontSize: '0.78rem', padding: '0.4rem 0.8rem' }}
+                  title="Gera automaticamente uma foto realista de alta definição baseada no nome e categoria"
+                >
+                  <Sparkles size={14} />
+                  <span>Gerar Foto do Material</span>
+                </button>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '8px',
+                background: '#090b0e',
+                border: '1px solid var(--border-subtle)',
+                overflow: 'hidden',
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="Preview"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={e => (e.currentTarget.style.display = 'none')}
+                  />
+                ) : (
+                  <ImageIcon size={24} color="var(--text-dim)" />
+                )}
+              </div>
+
+              <div style={{ flex: 1 }}>
+                <input
+                  type="text"
+                  placeholder="URL da imagem (ou use os botões acima para importar/gerar)"
+                  value={imageUrl}
+                  onChange={e => setImageUrl(e.target.value)}
+                  className="form-input"
+                  style={{ fontSize: '0.85rem' }}
+                />
+              </div>
             </div>
           </div>
 
