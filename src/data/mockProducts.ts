@@ -41,19 +41,19 @@ export const INITIAL_CATEGORIES: Category[] = [
 
 export const INITIAL_STORE_SETTINGS: StoreSettings = {
   id: 'store-default-1',
-  store_name: 'HidraElétrica Materiais',
-  whatsapp_number: '5511999998888', // 55 + DDD + Numero (configurável no painel)
-  phone: '(11) 3456-7890',
-  email: 'comercial@hidraeletrica.com.br',
+  store_name: 'HidraElétrica',
+  whatsapp_number: '553193451797', // 31 9345-1797
+  phone: '(31) 9345-1797',
+  email: 'contato@hidraeletrica.com',
   cnpj: '38.452.910/0001-44',
-  address_street: 'Av. das Indústrias, 1420',
-  address_neighborhood: 'Polo Industrial Leste',
-  address_city: 'São Paulo',
-  address_state: 'SP',
-  address_zip: '03100-000',
+  address_street: 'Av. Tancredo Neves, 154',
+  address_neighborhood: 'Centro',
+  address_city: 'Belo Oriente',
+  address_state: 'MG',
+  address_zip: '35195-000',
   business_hours_weekday: 'Segunda a Sexta: 07:30 às 18:00',
-  business_hours_saturday: 'Sábado: 08:00 às 13:00',
-  pix_key: 'financeiro@hidraeletrica.com.br',
+  business_hours_saturday: 'Sábado: 08:00 às 12:30',
+  pix_key: 'contato@hidraeletrica.com',
   pix_key_type: 'Chave E-mail',
   announcement_banner: '⚡ Mais de 6 Anos no Mercado | Atendimento Especializado & Pronta Entrega para sua Obra!',
   // Textos da Landing Page
@@ -344,11 +344,16 @@ export const INITIAL_PRODUCTS: Product[] = [
 
 export const MOCK_ADMIN_USER: UserProfile = {
   id: 'usr-admin-1',
-  email: 'admin@hidraeletrica.com.br',
-  full_name: 'Gerente HidraElétrica',
+  email: 'contato@hidraeletrica.com',
+  full_name: 'Administração HidraElétrica',
   role: 'loja',
-  phone: '(11) 99999-8888',
-  company_name: 'HidraElétrica Comércio de Materiais Ltda',
+  phone: '(31) 9345-1797',
+  company_name: 'HidraElétrica',
+  address_street: 'Av. Tancredo Neves, 154',
+  address_neighborhood: 'Centro',
+  address_city: 'Belo Oriente',
+  address_state: 'MG',
+  address_zip: '35195-000',
   cnpj_or_cpf: '38.452.910/0001-44'
 };
 

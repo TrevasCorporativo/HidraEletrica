@@ -46,7 +46,14 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [storeSettings, setStoreSettings] = useState<StoreSettings>(() => {
     try {
       const saved = localStorage.getItem(SETTINGS_STORAGE_KEY);
-      return saved ? JSON.parse(saved) : INITIAL_STORE_SETTINGS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.email === 'comercial@hidraeletrica.com.br' || parsed.address_city === 'São Paulo' || !parsed.whatsapp_number?.includes('31')) {
+          return { ...parsed, ...INITIAL_STORE_SETTINGS };
+        }
+        return { ...INITIAL_STORE_SETTINGS, ...parsed };
+      }
+      return INITIAL_STORE_SETTINGS;
     } catch {
       return INITIAL_STORE_SETTINGS;
     }
