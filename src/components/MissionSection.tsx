@@ -123,7 +123,7 @@ export const MissionSection: React.FC<MissionSectionProps> = ({ onGoToStore }) =
                 Nossa Visão
               </h3>
               <p style={{ fontSize: '0.94rem', color: 'var(--text-muted)', lineHeight: 1.7 }}>
-                Ser reconhecida como a loja e distribuidora de referência número 1 em confiança, velocidade logística e bom atendimento em toda a região, consolidando parcerias de longo prazo com eletricistas, instaladores hidráulicos e construtoras.
+                Ser reconhecida como a loja especializada e referência número 1 em confiança, velocidade logística e bom atendimento em toda a região, consolidando parcerias de longo prazo com eletricistas, instaladores hidráulicos e construtoras.
               </p>
             </div>
 

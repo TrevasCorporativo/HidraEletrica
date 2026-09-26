@@ -38,7 +38,7 @@ export const BrandsSection: React.FC = () => {
           gap: '0.4rem'
         }}>
           <Award size={14} color={isDark ? 'var(--yellow-400)' : '#d97706'} />
-          Distribuidor Oficial • Produtos 100% Originais com Garantia
+          Revendedor Autorizado • Produtos 100% Originais com Garantia
         </p>
 
         <div style={{

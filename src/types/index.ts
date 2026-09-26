@@ -82,6 +82,8 @@ export interface StoreSettings {
   metric_2_lbl?: string;
   metric_3_val?: string;
   metric_3_lbl?: string;
+  metric_4_val?: string;
+  metric_4_lbl?: string;
   quote_banner_title?: string;
   quote_banner_desc?: string;
 }

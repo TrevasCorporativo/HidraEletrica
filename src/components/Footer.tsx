@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-              Distribuição e varejo de materiais elétricos e hidráulicos com pronta entrega, alta qualidade técnica e garantia total para sua obra ou indústria.
+              Especialistas em materiais elétricos e hidráulicos com mais de 6 anos de mercado, pronta entrega, alta qualidade técnica e garantia total para sua obra ou reforma.
             </p>
 
             {/* Presença em Marketplaces e Instagram */}

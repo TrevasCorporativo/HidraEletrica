@@ -302,7 +302,7 @@ export const StoreSettingsView: React.FC = () => {
                   value={formData.hero_badge || ''}
                   onChange={e => handleChange('hero_badge', e.target.value)}
                   className="form-input"
-                  placeholder="Distribuidora & Varejo Especializado"
+                  placeholder="Loja Especializada em Elétrica & Hidráulica"
                 />
               </div>
 
@@ -433,7 +433,7 @@ export const StoreSettingsView: React.FC = () => {
                       value={formData.metric_1_val || ''}
                       onChange={e => handleChange('metric_1_val', e.target.value)}
                       className="form-input"
-                      placeholder="+10.000"
+                      placeholder="+6 Anos"
                       style={{ maxWidth: '100px' }}
                     />
                     <input
@@ -441,7 +441,7 @@ export const StoreSettingsView: React.FC = () => {
                       value={formData.metric_1_lbl || ''}
                       onChange={e => handleChange('metric_1_lbl', e.target.value)}
                       className="form-input"
-                      placeholder="Itens em Estoque"
+                      placeholder="De Mercado & Tradição"
                     />
                   </div>
                 </div>
@@ -454,7 +454,7 @@ export const StoreSettingsView: React.FC = () => {
                       value={formData.metric_2_val || ''}
                       onChange={e => handleChange('metric_2_val', e.target.value)}
                       className="form-input"
-                      placeholder="+5.000"
+                      placeholder="+15.000"
                       style={{ maxWidth: '100px' }}
                     />
                     <input
@@ -462,7 +462,7 @@ export const StoreSettingsView: React.FC = () => {
                       value={formData.metric_2_lbl || ''}
                       onChange={e => handleChange('metric_2_lbl', e.target.value)}
                       className="form-input"
-                      placeholder="Obras Abastecidas"
+                      placeholder="Clientes Atendidos"
                     />
                   </div>
                 </div>
@@ -475,7 +475,7 @@ export const StoreSettingsView: React.FC = () => {
                       value={formData.metric_3_val || ''}
                       onChange={e => handleChange('metric_3_val', e.target.value)}
                       className="form-input"
-                      placeholder="24h"
+                      placeholder="+50.000"
                       style={{ maxWidth: '100px' }}
                     />
                     <input
@@ -483,7 +483,28 @@ export const StoreSettingsView: React.FC = () => {
                       value={formData.metric_3_lbl || ''}
                       onChange={e => handleChange('metric_3_lbl', e.target.value)}
                       className="form-input"
-                      placeholder="Entrega Regional"
+                      placeholder="Produtos Vendidos"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Métrica 4 (Número + Rótulo)</label>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <input
+                      type="text"
+                      value={formData.metric_4_val || ''}
+                      onChange={e => handleChange('metric_4_val', e.target.value)}
+                      className="form-input"
+                      placeholder="99.8%"
+                      style={{ maxWidth: '100px' }}
+                    />
+                    <input
+                      type="text"
+                      value={formData.metric_4_lbl || ''}
+                      onChange={e => handleChange('metric_4_lbl', e.target.value)}
+                      className="form-input"
+                      placeholder="Avaliação Positiva"
                     />
                   </div>
                 </div>

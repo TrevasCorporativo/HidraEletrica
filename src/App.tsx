@@ -15,6 +15,7 @@ import { MissionSection } from './components/MissionSection';
 import { BrandsSection } from './components/BrandsSection';
 import { Footer } from './components/Footer';
 import { MarketplacesSection } from './components/MarketplacesSection';
+import { MetricsSection } from './components/MetricsSection';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { BuyerDashboard } from './components/buyer/BuyerDashboard';
 import { Product, UserRole } from './types';
@@ -102,10 +103,16 @@ const MainLayout: React.FC = () => {
         {/* VIEW 1: HOME / LANDING PAGE (DESEMBOLADA, MODERNA & ORGANIZADA) */}
         {currentView === 'home' && (
           <div>
-            {/* 1. Hero Principal Limpo e Moderno */}
-            <Hero onGoToStore={() => { setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+            {/* 1. Hero Principal Moderno com 2 Colunas, Ações e Cotação Expressa */}
+            <Hero
+              onGoToStore={() => { setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              onSelectCategory={handleSelectDepartment}
+            />
 
-            {/* 2. Canais Oficiais de Venda (Cards Grandes conforme solicitado no áudio) */}
+            {/* 2. Métricas de Mercado (+6 Anos, +15k Clientes, +50k Produtos, 99.8% Avaliação) */}
+            <MetricsSection />
+
+            {/* 3. Canais Oficiais de Venda & Marketplaces (Mercado Livre, Shopee, Instagram) */}
             <MarketplacesSection />
 
             {/* 3. Departamentos Técnicos Principais (Cards Ricos, Bonitos & Organizados) */}

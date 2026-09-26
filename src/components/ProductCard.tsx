@@ -57,7 +57,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProdu
           position: 'relative',
           width: '100%',
           height: '210px',
-          background: '#0d1016',
+          background: 'var(--bg-tertiary)',
           overflow: 'hidden'
         }}
       >

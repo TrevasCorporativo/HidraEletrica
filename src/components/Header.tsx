@@ -61,8 +61,8 @@ export const Header: React.FC<HeaderProps> = ({
               ⚡ HIDRAELÉTRICA
             </span>
             <span style={{ opacity: 0.4 }}>|</span>
-            <span style={{ fontWeight: 600 }} className="desktop-tagline">
-              Materiais Elétricos & Hidráulicos
+            <span style={{ fontWeight: 700 }} className="desktop-tagline">
+              +6 Anos de Excelência em Elétrica & Hidráulica
             </span>
           </div>
 
@@ -89,101 +89,108 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* 2. BARRA DE NAVEGAÇÃO PRINCIPAL (LIMPA & ESPAÇOSA) */}
+      {/* 2. BARRA DE NAVEGAÇÃO PRINCIPAL (MENUS ALINHADOS À ESQUERDA) */}
       <nav style={{
         background: isDark ? 'rgba(11, 14, 20, 0.98)' : 'rgba(255, 255, 255, 0.98)',
         backdropFilter: 'blur(16px)',
         borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #e2e8f0',
         transition: 'all 0.25s ease'
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.85rem 1.5rem', gap: '1.5rem' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.85rem 1.5rem', gap: '2rem' }}>
           
-          {/* Logo da HidraElétrica */}
-          <div
-            onClick={() => { setCurrentView('home'); setMobileMenuOpen(false); }}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', userSelect: 'none' }}
-          >
-            <HidraIcon size={38} />
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', lineHeight: 1.1 }}>
-                <span style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--text-main)', letterSpacing: '-0.03em' }}>
-                  Hidra
-                </span>
-                <span style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'Outfit', color: isDark ? 'var(--yellow-400)' : '#d97706', letterSpacing: '-0.03em' }}>
-                  Elétrica
+          {/* GRUPO ESQUERDA: Logo + Menus Alinhados à Esquerda */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
+            {/* Logo da HidraElétrica */}
+            <div
+              onClick={() => { setCurrentView('home'); setMobileMenuOpen(false); }}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', userSelect: 'none', flexShrink: 0 }}
+            >
+              <HidraIcon size={38} />
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', lineHeight: 1.1 }}>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'Outfit', color: 'var(--text-main)', letterSpacing: '-0.03em' }}>
+                    Hidra
+                  </span>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 900, fontFamily: 'Outfit', color: isDark ? 'var(--yellow-400)' : '#d97706', letterSpacing: '-0.03em' }}>
+                    Elétrica
+                  </span>
+                </div>
+                <span style={{ fontSize: '0.64rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', fontWeight: 700 }}>
+                  Materiais Elétricos & Hidráulicos
                 </span>
               </div>
-              <span style={{ fontSize: '0.64rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', fontWeight: 600 }}>
-                Distribuidora & Varejo
-              </span>
             </div>
-          </div>
 
-          {/* Menus Centrais Limpos */}
-          <div style={{ display: 'none', alignItems: 'center', gap: '2rem' }} className="desktop-nav">
-            <button
-              onClick={() => setCurrentView('home')}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: currentView === 'home' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
-                fontWeight: currentView === 'home' ? 800 : 600,
-                fontSize: '0.92rem',
-                cursor: 'pointer',
-                borderBottom: currentView === 'home' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
-                paddingBottom: '3px'
-              }}
-            >
-              Início
-            </button>
+            {/* Menus Começando da Esquerda (ao lado do logo) */}
+            <div style={{ display: 'none', alignItems: 'center', gap: '1.75rem' }} className="desktop-nav">
+              <button
+                onClick={() => setCurrentView('home')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: currentView === 'home' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
+                  fontWeight: currentView === 'home' ? 800 : 600,
+                  fontSize: '0.92rem',
+                  cursor: 'pointer',
+                  borderBottom: currentView === 'home' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
+                  paddingBottom: '3px',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                Início
+              </button>
 
-            <button
-              onClick={() => { setActiveCategory('todos'); setCurrentView('loja'); }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: currentView === 'loja' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
-                fontWeight: currentView === 'loja' ? 800 : 600,
-                fontSize: '0.92rem',
-                cursor: 'pointer',
-                borderBottom: currentView === 'loja' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
-                paddingBottom: '3px'
-              }}
-            >
-              Produtos
-            </button>
+              <button
+                onClick={() => { setActiveCategory('todos'); setCurrentView('loja'); }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: currentView === 'loja' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
+                  fontWeight: currentView === 'loja' ? 800 : 600,
+                  fontSize: '0.92rem',
+                  cursor: 'pointer',
+                  borderBottom: currentView === 'loja' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
+                  paddingBottom: '3px',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                Produtos
+              </button>
 
-            <button
-              onClick={() => setCurrentView('missao')}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: currentView === 'missao' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
-                fontWeight: currentView === 'missao' ? 800 : 600,
-                fontSize: '0.92rem',
-                cursor: 'pointer',
-                borderBottom: currentView === 'missao' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
-                paddingBottom: '3px'
-              }}
-            >
-              Nossa Missão
-            </button>
+              <button
+                onClick={() => setCurrentView('missao')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: currentView === 'missao' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
+                  fontWeight: currentView === 'missao' ? 800 : 600,
+                  fontSize: '0.92rem',
+                  cursor: 'pointer',
+                  borderBottom: currentView === 'missao' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
+                  paddingBottom: '3px',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                Nossa Missão
+              </button>
 
-            <button
-              onClick={() => setCurrentView('sobre')}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: currentView === 'sobre' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
-                fontWeight: currentView === 'sobre' ? 800 : 600,
-                fontSize: '0.92rem',
-                cursor: 'pointer',
-                borderBottom: currentView === 'sobre' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
-                paddingBottom: '3px'
-              }}
-            >
-              Sobre Nós
-            </button>
+              <button
+                onClick={() => setCurrentView('sobre')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: currentView === 'sobre' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
+                  fontWeight: currentView === 'sobre' ? 800 : 600,
+                  fontSize: '0.92rem',
+                  cursor: 'pointer',
+                  borderBottom: currentView === 'sobre' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
+                  paddingBottom: '3px',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                Sobre Nós
+              </button>
+            </div>
           </div>
 
           {/* Busca visível no Header apenas quando estiver navegando no catálogo da Loja para não poluir a Home */}
