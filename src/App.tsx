@@ -4,7 +4,9 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { StoreProvider, useStore } from './context/StoreContext';
 import { CartProvider } from './context/CartContext';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
+import { EnterpriseHero } from './components/EnterpriseHero';
+import { DepartmentGrid } from './components/DepartmentGrid';
+import { SolutionsSection } from './components/SolutionsSection';
 import { CategoryFilter } from './components/CategoryFilter';
 import { ProductCard } from './components/ProductCard';
 import { ProductModal } from './components/ProductModal';
@@ -15,7 +17,6 @@ import { MissionSection } from './components/MissionSection';
 import { BrandsSection } from './components/BrandsSection';
 import { Footer } from './components/Footer';
 import { MarketplacesSection } from './components/MarketplacesSection';
-import { MetricsSection } from './components/MetricsSection';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { BuyerDashboard } from './components/buyer/BuyerDashboard';
 import { Product, UserRole } from './types';
@@ -100,294 +101,25 @@ const MainLayout: React.FC = () => {
       {/* Conteúdo Principal Conforme a View Ativa */}
       <main style={{ flex: 1 }}>
         
-        {/* VIEW 1: HOME / LANDING PAGE (DESEMBOLADA, MODERNA & ORGANIZADA) */}
+        {/* VIEW 1: HOME / LANDING PAGE - NOVO FRONT ENTERPRISE MINIMALISTA & RESPONSIVO */}
         {currentView === 'home' && (
           <div>
-            {/* 1. Hero Principal Moderno com 2 Colunas, Ações e Cotação Expressa */}
-            <Hero
+            {/* 1. Hero Principal Enterprise com 2 Colunas, Ações, Cotação e Métricas Integradas */}
+            <EnterpriseHero
               onGoToStore={() => { setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               onSelectCategory={handleSelectDepartment}
             />
 
-            {/* 2. Métricas de Mercado (+6 Anos, +15k Clientes, +50k Produtos, 99.8% Avaliação) */}
-            <MetricsSection />
-
-            {/* 3. Canais Oficiais de Venda & Marketplaces (Mercado Livre, Shopee, Instagram) */}
+            {/* 2. Canais Oficiais de Venda & Marketplaces */}
             <MarketplacesSection />
 
-            {/* 3. Departamentos Técnicos Principais (Cards Ricos, Bonitos & Organizados) */}
-            <section style={{ padding: '1.5rem 0 3.5rem 0' }}>
-              <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                  <span className="badge-yellow" style={{ marginBottom: '0.5rem' }}>
-                    Departamentos Principais
-                  </span>
-                  <h2 style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.4rem' }}>
-                    Linhas Completas para sua Obra
-                  </h2>
-                  <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '580px', margin: '0 auto' }}>
-                    Selecione a categoria técnica desejada para encontrar materiais originais a pronta entrega:
-                  </p>
-                </div>
+            {/* 3. Departamentos Especializados (Grid Minimalista Responsivo) */}
+            <DepartmentGrid onSelectDepartment={handleSelectDepartment} />
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                  gap: '1.5rem'
-                }}>
-                  {/* Card 1: Elétrica */}
-                  <div
-                    onClick={() => handleSelectDepartment('eletrica')}
-                    className="glass-panel"
-                    style={{
-                      padding: '2rem 1.75rem',
-                      borderRadius: 'var(--radius-xl)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.25s ease',
-                      border: isDark ? '1px solid rgba(250, 204, 21, 0.25)' : '1px solid #e2e8f0',
-                      background: isDark ? 'rgba(18, 22, 31, 0.85)' : '#ffffff',
-                      boxShadow: isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)'
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.borderColor = 'var(--yellow-400)';
-                      e.currentTarget.style.boxShadow = isDark ? '0 12px 28px rgba(0,0,0,0.4)' : '0 12px 28px rgba(234, 179, 8, 0.12)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.borderColor = isDark ? 'rgba(250, 204, 21, 0.25)' : '#e2e8f0';
-                      e.currentTarget.style.boxShadow = isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)';
-                    }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: isDark ? 'rgba(250, 204, 21, 0.15)' : '#fef3c7', color: isDark ? 'var(--yellow-400)' : '#b45309', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Zap size={24} />
-                        </div>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 800, padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', background: isDark ? 'rgba(255, 255, 255, 0.05)' : '#f1f5f9', color: 'var(--text-muted)' }}>
-                          +500 itens
-                        </span>
-                      </div>
+            {/* 4. Soluções Especializadas para Perfis de Compra (Eletricistas, Construtoras, Reformas) */}
+            <SolutionsSection onGoToStore={() => { setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
 
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-main)' }}>
-                        Linha Elétrica
-                      </h3>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1.25rem' }}>
-                        Cabos flexíveis antichama, disjuntores DIN e quadros de distribuição Steck e Schneider.
-                      </p>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--text-main)', marginBottom: '1.5rem' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color={isDark ? 'var(--yellow-400)' : '#d97706'} /> Cabos 750V (1,5mm a 16mm)
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color={isDark ? 'var(--yellow-400)' : '#d97706'} /> Disjuntores Mono, Bi e Tripolares
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color={isDark ? 'var(--yellow-400)' : '#d97706'} /> Quadros, Barramentos e Conduítes
-                        </span>
-                      </div>
-                    </div>
-
-                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: isDark ? 'var(--yellow-400)' : '#b45309', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      Explorar Produtos de Elétrica <ArrowRight size={15} />
-                    </span>
-                  </div>
-
-                  {/* Card 2: Hidráulica */}
-                  <div
-                    onClick={() => handleSelectDepartment('hidraulica')}
-                    className="glass-panel"
-                    style={{
-                      padding: '2rem 1.75rem',
-                      borderRadius: 'var(--radius-xl)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.25s ease',
-                      border: isDark ? '1px solid rgba(56, 189, 248, 0.25)' : '1px solid #e2e8f0',
-                      background: isDark ? 'rgba(18, 22, 31, 0.85)' : '#ffffff',
-                      boxShadow: isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)'
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.borderColor = '#0284c7';
-                      e.currentTarget.style.boxShadow = isDark ? '0 12px 28px rgba(0,0,0,0.4)' : '0 12px 28px rgba(2, 132, 199, 0.12)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.borderColor = isDark ? 'rgba(56, 189, 248, 0.25)' : '#e2e8f0';
-                      e.currentTarget.style.boxShadow = isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)';
-                    }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: isDark ? 'rgba(56, 189, 248, 0.15)' : '#e0f2fe', color: '#0284c7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Droplets size={24} />
-                        </div>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 800, padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', background: isDark ? 'rgba(255, 255, 255, 0.05)' : '#f1f5f9', color: 'var(--text-muted)' }}>
-                          +400 itens
-                        </span>
-                      </div>
-
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-main)' }}>
-                        Linha Hidráulica
-                      </h3>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1.25rem' }}>
-                        Tubos e conexões soldáveis marrom Tigre, registros de gaveta e válvulas Deca.
-                      </p>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--text-main)', marginBottom: '1.5rem' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#0284c7" /> Tubos Soldáveis e Esgoto (20mm a 100mm)
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#0284c7" /> Joelhos, Tês, Luvas e Adaptadores
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#0284c7" /> Registros de Gaveta e Pressão
-                        </span>
-                      </div>
-                    </div>
-
-                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#0284c7', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      Explorar Produtos de Hidráulica <ArrowRight size={15} />
-                    </span>
-                  </div>
-
-                  {/* Card 3: Iluminação */}
-                  <div
-                    onClick={() => handleSelectDepartment('iluminacao')}
-                    className="glass-panel"
-                    style={{
-                      padding: '2rem 1.75rem',
-                      borderRadius: 'var(--radius-xl)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.25s ease',
-                      border: isDark ? '1px solid rgba(251, 191, 36, 0.25)' : '1px solid #e2e8f0',
-                      background: isDark ? 'rgba(18, 22, 31, 0.85)' : '#ffffff',
-                      boxShadow: isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)'
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.borderColor = '#d97706';
-                      e.currentTarget.style.boxShadow = isDark ? '0 12px 28px rgba(0,0,0,0.4)' : '0 12px 28px rgba(217, 119, 6, 0.12)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.borderColor = isDark ? 'rgba(251, 191, 36, 0.25)' : '#e2e8f0';
-                      e.currentTarget.style.boxShadow = isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)';
-                    }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: isDark ? 'rgba(251, 191, 36, 0.15)' : '#fef3c7', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Lightbulb size={24} />
-                        </div>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 800, padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', background: isDark ? 'rgba(255, 255, 255, 0.05)' : '#f1f5f9', color: 'var(--text-muted)' }}>
-                          Alta Eficiência
-                        </span>
-                      </div>
-
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-main)' }}>
-                        Iluminação LED
-                      </h3>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1.25rem' }}>
-                        Refletores de alta potência IP66 para áreas externas e painéis slim de embutir.
-                      </p>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--text-main)', marginBottom: '1.5rem' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#d97706" /> Refletores LED IP66 (50W a 200W)
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#d97706" /> Painéis Slim Embutir e Sobrepor
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#d97706" /> Lâmpadas Bulbo e Fitas LED
-                        </span>
-                      </div>
-                    </div>
-
-                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#d97706', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      Explorar Linha de Iluminação <ArrowRight size={15} />
-                    </span>
-                  </div>
-
-                  {/* Card 4: Ferramentas */}
-                  <div
-                    onClick={() => handleSelectDepartment('ferramentas')}
-                    className="glass-panel"
-                    style={{
-                      padding: '2rem 1.75rem',
-                      borderRadius: 'var(--radius-xl)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.25s ease',
-                      border: isDark ? '1px solid rgba(16, 185, 129, 0.25)' : '1px solid #e2e8f0',
-                      background: isDark ? 'rgba(18, 22, 31, 0.85)' : '#ffffff',
-                      boxShadow: isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)'
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.borderColor = '#16a34a';
-                      e.currentTarget.style.boxShadow = isDark ? '0 12px 28px rgba(0,0,0,0.4)' : '0 12px 28px rgba(22, 163, 74, 0.12)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.borderColor = isDark ? 'rgba(16, 185, 129, 0.25)' : '#e2e8f0';
-                      e.currentTarget.style.boxShadow = isDark ? 'var(--shadow-sm)' : '0 4px 16px rgba(0, 0, 0, 0.04)';
-                    }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: isDark ? 'rgba(16, 185, 129, 0.15)' : '#dcfce7', color: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Wrench size={24} />
-                        </div>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 800, padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', background: isDark ? 'rgba(255, 255, 255, 0.05)' : '#f1f5f9', color: 'var(--text-muted)' }}>
-                          Uso Profissional
-                        </span>
-                      </div>
-
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-main)' }}>
-                        Ferramentas & Bombas
-                      </h3>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1.25rem' }}>
-                        Instrumentos de teste True RMS, alicates de precisão e pressurizadores Dancor.
-                      </p>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--text-main)', marginBottom: '1.5rem' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#16a34a" /> Multímetros e Alicates Amperímetros
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#16a34a" /> Alicates Crimpadores e de Decapagem
-                        </span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                          <Check size={14} color="#16a34a" /> Motobombas e Pressurizadores Dancor
-                        </span>
-                      </div>
-                    </div>
-
-                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#16a34a', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      Explorar Ferramentas & Bombas <ArrowRight size={15} />
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* 4. Vitrine Curada de Destaques (Limpa & sem poluição) */}
+            {/* 5. Vitrine Curada de Destaques (Grid Minimalista de Produtos com 2 Colunas no Mobile) */}
             <section style={{ padding: '2.5rem 0 3.5rem 0' }}>
               <div className="container">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -395,7 +127,7 @@ const MainLayout: React.FC = () => {
                     <span className="badge-yellow" style={{ marginBottom: '0.4rem' }}>
                       <Star size={14} /> Mais Procurados
                     </span>
-                    <h2 style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.2rem)', fontWeight: 800 }}>
+                    <h2 style={{ fontSize: 'clamp(1.6rem, 2.8vw, 2.1rem)', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>
                       Destaques da Loja
                     </h2>
                   </div>
@@ -403,19 +135,15 @@ const MainLayout: React.FC = () => {
                   <button
                     onClick={() => { setActiveCategory('todos'); setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="btn-outline-yellow"
-                    style={{ fontSize: '0.88rem' }}
+                    style={{ fontSize: '0.86rem' }}
                   >
-                    <span>Ver Catálogo Geral</span>
-                    <ArrowRight size={16} />
+                    <span>Ver Catálogo Completo</span>
+                    <ArrowRight size={15} />
                   </button>
                 </div>
 
-                {/* Grid Limpo com os Produtos Principais */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-                  gap: '1.5rem'
-                }}>
+                {/* Grid Responsivo de Produtos (2 colunas no mobile) */}
+                <div className="products-grid">
                   {homeFeaturedProducts.slice(0, 4).map(prod => (
                     <ProductCard
                       key={prod.id}
@@ -557,11 +285,7 @@ const MainLayout: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-                  gap: '1.75rem'
-                }}>
+                <div className="products-grid">
                   {displayedProducts.map(prod => (
                     <ProductCard
                       key={prod.id}
