@@ -25,8 +25,8 @@ import { InstagramIcon } from './SocialIcons';
 
 interface HeaderProps {
   onOpenAuth: () => void;
-  currentView: 'home' | 'loja' | 'sobre' | 'admin' | 'buyer';
-  setCurrentView: (view: 'home' | 'loja' | 'sobre' | 'admin' | 'buyer') => void;
+  currentView: 'home' | 'loja' | 'missao' | 'sobre' | 'admin' | 'buyer';
+  setCurrentView: (view: 'home' | 'loja' | 'missao' | 'sobre' | 'admin' | 'buyer') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 100, width: '100%', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)' }}>
-      {/* 1. BARRA SUPERIOR AMARELA - SLIM, ELEGANTE & DIRETA */}
+      {/* 1. BARRA SUPERIOR AMARELA - SLIM, ELEGANTE & DIRETA COM INFORMAÇÕES ÚTEIS */}
       <div className="announcement-bar" style={{ padding: '0.35rem 1rem', fontSize: '0.78rem' }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '1rem', flexWrap: 'wrap' }}>
           
@@ -61,49 +61,29 @@ export const Header: React.FC<HeaderProps> = ({
               ⚡ HIDRAELÉTRICA
             </span>
             <span style={{ opacity: 0.4 }}>|</span>
-            <span style={{ fontWeight: 600, display: 'none' }} className="desktop-tagline">
+            <span style={{ fontWeight: 600 }} className="desktop-tagline">
               Materiais Elétricos & Hidráulicos
             </span>
           </div>
 
-          {/* Atalhos Rápidos Oficiais */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <span style={{ opacity: 0.85, fontWeight: 700 }}>Compre também em:</span>
-            
+          {/* Informações Úteis de Contato & Entrega */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap', fontSize: '0.76rem' }}>
+            <span style={{ fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+              📦 Pronta Entrega para sua Obra
+            </span>
+            <span style={{ opacity: 0.4 }}>•</span>
             <a
-              href="https://www.mercadolivre.com.br"
+              href={`https://wa.me/${cleanPhone}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="announcement-pill"
-              title="Loja Oficial Mercado Livre"
+              style={{ color: '#000000', fontWeight: 800, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
             >
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#2563eb' }}></span>
-              <span>Mercado Livre</span>
-              <ExternalLink size={10} />
+              💬 Televendas: {storeSettings.phone || storeSettings.whatsapp_number}
             </a>
-
-            <a
-              href="https://shopee.com.br"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="announcement-pill"
-              title="Loja Oficial Shopee"
-            >
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#ee4d2d' }}></span>
-              <span>Shopee</span>
-              <ExternalLink size={10} />
-            </a>
-
-            <a
-              href="https://www.instagram.com/hidra.eletrica"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="announcement-pill"
-              title="Instagram Oficial"
-            >
-              <InstagramIcon size={12} color="#c026d3" />
-              <span>@hidra.eletrica</span>
-            </a>
+            <span style={{ opacity: 0.4 }}>•</span>
+            <span style={{ fontWeight: 700 }}>
+              🏢 Faturamento PJ Facilitado
+            </span>
           </div>
 
         </div>
@@ -170,7 +150,23 @@ export const Header: React.FC<HeaderProps> = ({
                 paddingBottom: '3px'
               }}
             >
-              Loja / Produtos
+              Produtos
+            </button>
+
+            <button
+              onClick={() => setCurrentView('missao')}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: currentView === 'missao' ? (isDark ? 'var(--yellow-400)' : '#b45309') : 'var(--text-main)',
+                fontWeight: currentView === 'missao' ? 800 : 600,
+                fontSize: '0.92rem',
+                cursor: 'pointer',
+                borderBottom: currentView === 'missao' ? `2px solid ${isDark ? 'var(--yellow-400)' : '#b45309'}` : '2px solid transparent',
+                paddingBottom: '3px'
+              }}
+            >
+              Nossa Missão
             </button>
 
             <button
@@ -404,7 +400,13 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => { setActiveCategory('todos'); setCurrentView('loja'); setMobileMenuOpen(false); }}
               style={{ background: 'none', border: 'none', color: 'var(--text-main)', textAlign: 'left', fontSize: '1rem', fontWeight: 600, padding: '0.4rem 0' }}
             >
-              📦 Loja / Produtos
+              📦 Produtos
+            </button>
+            <button
+              onClick={() => { setCurrentView('missao'); setMobileMenuOpen(false); }}
+              style={{ background: 'none', border: 'none', color: 'var(--text-main)', textAlign: 'left', fontSize: '1rem', fontWeight: 600, padding: '0.4rem 0' }}
+            >
+              🎯 Nossa Missão
             </button>
             <button
               onClick={() => { setCurrentView('sobre'); setMobileMenuOpen(false); }}

@@ -14,15 +14,19 @@ export const Hero: React.FC<HeroProps> = ({ onGoToStore }) => {
   const cleanPhone = storeSettings.whatsapp_number.replace(/\D/g, '');
 
   const heroBadge = storeSettings.hero_badge || 'Distribuidora & Varejo Especializado';
-  const heroTitle = storeSettings.hero_title || 'A Força da Hidráulica e a Potência da Elétrica';
-  const heroSubtitle = storeSettings.hero_subtitle || 'Cabos elétricos normatizados, disjuntores, quadros, tubos, conexões e iluminação técnica com pronta entrega imediata.';
-  const ctaPrimary = storeSettings.hero_cta_primary || 'Ver Catálogo Completo';
-  const ctaWhatsapp = storeSettings.hero_cta_whatsapp || 'Orçamento no WhatsApp';
+  const heroTitle = storeSettings.hero_title && storeSettings.hero_title !== 'A Força da Hidráulica e a Potência da Elétrica'
+    ? storeSettings.hero_title
+    : 'Tudo para sua Obra e Reforma com Pronta Entrega e Preço Justo';
+  const heroSubtitle = storeSettings.hero_subtitle && !storeSettings.hero_subtitle.includes('normatizados')
+    ? storeSettings.hero_subtitle
+    : 'Linha completa em materiais elétricos, hidráulicos, iluminação LED e ferramentas das melhores marcas do mercado. Atendimento técnico e condições especiais para você e sua empresa.';
+  const ctaPrimary = storeSettings.hero_cta_primary || 'Ver Catálogo de Produtos';
+  const ctaWhatsapp = storeSettings.hero_cta_whatsapp || 'Falar com Vendedor no WhatsApp';
 
   return (
     <section style={{
       position: 'relative',
-      padding: '5rem 0 4rem 0',
+      padding: '4.5rem 0 3.5rem 0',
       textAlign: 'center',
       overflow: 'hidden'
     }}>
@@ -32,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({ onGoToStore }) => {
         top: '0%',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '600px',
+        width: '640px',
         height: '320px',
         background: isDark
           ? 'radial-gradient(circle, rgba(250, 204, 21, 0.08) 0%, transparent 70%)'
@@ -42,14 +46,14 @@ export const Hero: React.FC<HeroProps> = ({ onGoToStore }) => {
         zIndex: 0
       }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '820px' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '840px' }}>
         
         {/* Pill de Identificação */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '0.5rem',
-          marginBottom: '1.5rem',
+          marginBottom: '1.25rem',
           background: isDark ? 'rgba(250, 204, 21, 0.08)' : '#fef3c7',
           border: isDark ? '1px solid rgba(250, 204, 21, 0.25)' : '1px solid #fde047',
           padding: '0.35rem 0.95rem',
@@ -63,15 +67,15 @@ export const Hero: React.FC<HeroProps> = ({ onGoToStore }) => {
 
         {/* Título Principal */}
         <h1 style={{
-          fontSize: 'clamp(2.3rem, 4.8vw, 3.6rem)',
+          fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
           fontWeight: 900,
-          lineHeight: 1.15,
-          marginBottom: '1.25rem',
+          lineHeight: 1.18,
+          marginBottom: '1.2rem',
           letterSpacing: '-0.03em'
         }}>
-          {heroTitle.includes('Hidráulica') && heroTitle.includes('Elétrica') ? (
+          {heroTitle.includes('Obra e Reforma') ? (
             <>
-              A Força da <span style={{ color: '#0284c7' }}>Hidráulica</span> e a Potência da <span className="text-gradient-yellow">Elétrica</span>
+              Tudo para sua <span className="text-gradient-yellow">Obra e Reforma</span> com Pronta Entrega e Preço Justo
             </>
           ) : (
             heroTitle
@@ -82,62 +86,62 @@ export const Hero: React.FC<HeroProps> = ({ onGoToStore }) => {
         <p style={{
           fontSize: 'clamp(1rem, 1.8vw, 1.12rem)',
           color: 'var(--text-muted)',
-          lineHeight: 1.6,
+          lineHeight: 1.65,
           marginBottom: '2.5rem',
-          maxWidth: '620px',
+          maxWidth: '680px',
           margin: '0 auto 2.5rem auto'
         }}>
           {heroSubtitle}
         </p>
 
         {/* Apenas Dois Botões de Ação Diretos e Objetivos */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
           <button
             onClick={onGoToStore}
             className="btn-primary"
-            style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}
+            style={{ padding: '0.9rem 2.2rem', fontSize: '1rem' }}
           >
             <span>{ctaPrimary}</span>
             <ArrowRight size={18} />
           </button>
 
           <a
-            href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('Olá! Gostaria de fazer uma cotação de materiais elétricos e hidráulicos.')}`}
+            href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('Olá! Gostaria de falar com um vendedor da HidraElétrica para cotar materiais.')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-whatsapp"
-            style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}
+            style={{ padding: '0.9rem 2.2rem', fontSize: '1rem' }}
           >
             <MessageSquare size={18} />
             <span>{ctaWhatsapp}</span>
           </a>
         </div>
 
-        {/* Faixa Sutil de Confiança em 1 Linha (Minimalista) */}
+        {/* Faixa Sutil de Confiança em 1 Linha (Benefícios Claros e Reais) */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '1.75rem',
           flexWrap: 'wrap',
-          fontSize: '0.82rem',
+          fontSize: '0.84rem',
           color: 'var(--text-muted)',
           paddingTop: '1.5rem',
           borderTop: '1px solid var(--border-subtle)'
         }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            <ShieldCheck size={16} color={isDark ? 'var(--yellow-400)' : '#d97706'} />
-            <strong>Padrão ABNT & Inmetro</strong>
+            <Truck size={17} color="#16a34a" />
+            <strong style={{ color: 'var(--text-main)' }}>Entrega Rápida no seu Endereço</strong>
           </span>
           <span style={{ opacity: 0.25 }}>•</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            <Truck size={16} color="#16a34a" />
-            <strong>Entrega Ágil em até 24h</strong>
+            <Building2 size={17} color="#0284c7" />
+            <strong style={{ color: 'var(--text-main)' }}>Faturamento Especial para Empresas e PJ</strong>
           </span>
           <span style={{ opacity: 0.25 }}>•</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            <Building2 size={16} color="#0284c7" />
-            <strong>Condições para Construtoras & PJ</strong>
+            <ShieldCheck size={17} color={isDark ? 'var(--yellow-400)' : '#d97706'} />
+            <strong style={{ color: 'var(--text-main)' }}>Produtos 100% Originais com Garantia</strong>
           </span>
         </div>
 

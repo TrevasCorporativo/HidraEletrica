@@ -17,7 +17,7 @@ import { HidraIcon } from './HidraIcon';
 import { InstagramIcon } from './SocialIcons';
 
 interface FooterProps {
-  onNavigate: (view: 'home' | 'loja' | 'sobre') => void;
+  onNavigate: (view: 'home' | 'loja' | 'missao' | 'sobre') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
