@@ -82,7 +82,7 @@ export const Header: React.FC<HeaderProps> = ({
             </a>
             <span style={{ opacity: 0.4 }}>•</span>
             <span style={{ fontWeight: 700 }}>
-              🏢 Faturamento PJ Facilitado
+              🔒 Produtos 100% Originais
             </span>
           </div>
 

@@ -18,8 +18,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onGoToStore }) => {
   const feat2Title = storeSettings.feature_2_title || 'Qualidade Certificada & Procedência';
   const feat2Desc = storeSettings.feature_2_desc || 'Trabalhamos exclusivamente com produtos 100% originais das melhores marcas do país, com garantia de fábrica e conformidade ABNT/Inmetro.';
 
-  const feat3Title = storeSettings.feature_3_title || 'Estoque Pronta Entrega & PJ';
-  const feat3Desc = storeSettings.feature_3_desc || 'Amplo estoque à pronta entrega, agilidade logística para sua obra não parar e condições especiais com faturamento facilitado para empresas.';
+  const feat3Title = storeSettings.feature_3_title || 'Estoque com Pronta Entrega';
+  const feat3Desc = storeSettings.feature_3_desc || 'Amplo estoque à pronta entrega, agilidade logística para sua obra não parar e suporte dedicado em cada pedido.';
 
   const m1Val = storeSettings.metric_1_val || '+6 Anos';
   const m1Lbl = storeSettings.metric_1_lbl || 'De Mercado & Tradição';

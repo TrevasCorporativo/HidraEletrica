@@ -6,7 +6,6 @@ import { CartProvider } from './context/CartContext';
 import { Header } from './components/Header';
 import { EnterpriseHero } from './components/EnterpriseHero';
 import { DepartmentGrid } from './components/DepartmentGrid';
-import { SolutionsSection } from './components/SolutionsSection';
 import { CategoryFilter } from './components/CategoryFilter';
 import { ProductCard } from './components/ProductCard';
 import { ProductModal } from './components/ProductModal';
@@ -104,22 +103,18 @@ const MainLayout: React.FC = () => {
         {/* VIEW 1: HOME / LANDING PAGE - NOVO FRONT ENTERPRISE MINIMALISTA & RESPONSIVO */}
         {currentView === 'home' && (
           <div>
-            {/* 1. Hero Principal Enterprise com 2 Colunas, Ações, Cotação e Métricas Integradas */}
+            {/* 1. Hero Principal com Métricas Integradas */}
             <EnterpriseHero
               onGoToStore={() => { setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              onSelectCategory={handleSelectDepartment}
             />
 
-            {/* 2. Canais Oficiais de Venda & Marketplaces */}
-            <MarketplacesSection />
-
-            {/* 3. Departamentos Especializados (Grid Minimalista Responsivo) */}
+            {/* 2. Departamentos Especializados (Linhas Elétrica, Hidráulica, Iluminação, Ferramentas) */}
             <DepartmentGrid onSelectDepartment={handleSelectDepartment} />
 
-            {/* 4. Soluções Especializadas para Perfis de Compra (Eletricistas, Construtoras, Reformas) */}
-            <SolutionsSection onGoToStore={() => { setCurrentView('loja'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+            {/* 3. Canais Oficiais de Venda & Marketplaces (Mercado Livre, Shopee, Instagram) */}
+            <MarketplacesSection />
 
-            {/* 5. Vitrine Curada de Destaques (Grid Minimalista de Produtos com 2 Colunas no Mobile) */}
+            {/* 4. Vitrine Curada de Destaques (Grid Minimalista de Produtos 2x2 no mobile) */}
             <section style={{ padding: '2.5rem 0 3.5rem 0' }}>
               <div className="container">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>

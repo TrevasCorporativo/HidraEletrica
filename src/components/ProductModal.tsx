@@ -184,7 +184,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                 {formattedPrice}
               </div>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Faturamento no boleto disponível para CNPJ sob consulta
+                Condições especiais e pronta entrega sob consulta
               </span>
             </div>
 

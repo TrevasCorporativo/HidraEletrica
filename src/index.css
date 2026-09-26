@@ -515,6 +515,10 @@ button, input, select, textarea {
 }
 
 @media (max-width: 768px) {
+  .announcement-bar {
+    display: none !important;
+  }
+
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
